@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 280" width="460" height="280" fill="none">
+  <circle cx="330" cy="120" r="112" fill="#f4b544" opacity=".1"/>
+  <circle cx="330" cy="120" r="152" stroke="#f4b544" stroke-opacity=".16" stroke-width="1.5"/>
+  <circle cx="330" cy="120" r="196" stroke="#fff9f0" stroke-opacity=".07" stroke-width="1.5"/>
+  <!-- road -->
+  <path d="M-30 236 C110 206 240 262 490 190" stroke="#1d1530" stroke-width="64"/>
+  <path d="M-30 236 C110 206 240 262 490 190" stroke="#f4b544" stroke-width="3" stroke-dasharray="16 14" stroke-linecap="round" opacity=".9"/>
+  <!-- route + destination pin -->
+  <path d="M262 142 C300 84 352 96 396 70" stroke="#f4b544" stroke-width="3.5" stroke-dasharray="1 9" stroke-linecap="round"/>
+  <g transform="translate(396 70)">
+    <ellipse cx="0" cy="3" rx="13" ry="4" fill="#000" opacity=".25"/>
+    <path d="M0 0 C-17 -14 -21 -26 -21 -34 A21 21 0 1 1 21 -34 C21 -26 17 -14 0 0Z" fill="#fff9f0"/>
+    <circle cx="0" cy="-34" r="8.5" fill="#f4b544"/>
+    <circle cx="0" cy="-34" r="3.2" fill="#30264a"/>
+  </g>
+  <!-- speed lines -->
+  <path d="M70 188 H118 M52 204 H104 M78 220 H112" stroke="#fff9f0" stroke-opacity=".28" stroke-width="3" stroke-linecap="round"/>
+  <!-- scooter + rider -->
+  <g transform="translate(112 96) rotate(-3 100 110)">
+    <ellipse cx="100" cy="130" rx="66" ry="5.5" fill="#000" opacity=".3"/>
+    <!-- rear + front wheels -->
+    <circle cx="50" cy="110" r="17" fill="#120e1c" stroke="#6a5a9c" stroke-width="2.5"/><circle cx="50" cy="110" r="7.5" fill="#eae5f4"/><circle cx="50" cy="110" r="2.8" fill="#30264a"/>
+    <circle cx="150" cy="110" r="17" fill="#120e1c" stroke="#6a5a9c" stroke-width="2.5"/><circle cx="150" cy="110" r="7.5" fill="#eae5f4"/><circle cx="150" cy="110" r="2.8" fill="#30264a"/>
+    <!-- body -->
+    <path d="M88 98 H132 Q137 98 137 103 V108 H88 Z" fill="#251d3a"/>
+    <path d="M28 106 C25 84 42 72 68 72 L94 75 C97 87 95 99 90 108 L58 108 Z" fill="#f4b544"/>
+    <path d="M60 100 C70 96 82 96 90 100" stroke="#b97f12" stroke-opacity=".5" stroke-width="2" stroke-linecap="round"/>
+    <path d="M125 104 C127 84 133 66 140 48 L154 52 C150 70 148 88 148 106 Z" fill="#f4b544"/>
+    <path d="M42 73 C48 62 72 60 95 66 L95 76 L42 78 Z" fill="#120e1c"/>
+    <path d="M147 48 L152 108" stroke="#eae5f4" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M139 42 L152 37 L164 41" stroke="#eae5f4" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="156" cy="61" r="5.5" fill="#fff3c4"/>
+    <path d="M156 61 L205 48 L205 76 Z" fill="#fff3c4" opacity=".14"/>
+    <rect x="25" y="90" width="4.5" height="8" rx="2.2" fill="#ff7b7b"/>
+    <!-- rider -->
+    <path d="M70 66 L104 77 L108 101" stroke="#8472b4" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+    <ellipse cx="113" cy="103.5" rx="10" ry="4.5" fill="#eae5f4"/>
+    <rect x="62" y="26" width="23" height="43" rx="11" transform="rotate(15 73 47)" fill="#fff9f0"/>
+    <path d="M80 36 L111 44 L141 43" stroke="#fff9f0" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="143" cy="43" r="4.2" fill="#f4b544"/>
+    <circle cx="83" cy="18" r="11.5" fill="#eae5f4"/>
+    <path d="M86 11 Q98 13 96 23 L87 23 Z" fill="#30264a"/>
+    <path d="M72 15 Q83 3 95 14" stroke="#f4b544" stroke-width="3.2" stroke-linecap="round"/>
+  </g>
+</svg>

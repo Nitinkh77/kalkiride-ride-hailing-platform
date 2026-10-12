@@ -1,0 +1,417 @@
+@import "leaflet/dist/leaflet.css";
+@import "tailwindcss";
+
+/* Class-based dark mode (toggled by lib/theme.ts, set pre-paint by the inline script in layout.tsx) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * KalkiRide design tokens: ONE semantic set, two values (light / .dark).
+ * Components keep using Tailwind's slate-*, blue-*, amber-* utilities; the scales are
+ * mapped to these tokens in @theme inline below, so hover:/focus:/active: variants
+ * follow the theme automatically. Edit colours here only.
+ */
+:root {
+  --kr-page: #fff9f0;
+  --kr-surface: #ffffff;
+  --kr-input: #f5efe5;
+  --kr-hover: #f5efe5;
+  --kr-selected: #efeaf8;
+  --kr-selected-strong: #e3dbf2;
+  --kr-header: rgb(255 255 255 / 0.92);
+  --kr-border: #e6ded2;
+  --kr-border-strong: #cfc6b8;
+
+  --kr-text: #211c2d;
+  --kr-text-2: #51495f;
+  --kr-muted: #70677d;
+
+  --kr-brand: #f4b544;
+  --kr-brand-hover: #e6a22e;
+  --kr-on-brand: #211c2d;
+  --kr-indigo: #30264a;
+  --kr-indigo-hover: #3f3260;
+  --kr-link: #30264a;
+  --kr-inverse: #211c2d;
+  --kr-inverse-hover: #332b45;
+  --kr-focus: #5e4c8e;
+
+  --kr-pickup: #d92d3a;
+  --kr-dest: #f4b544;
+  --kr-dest-text: #b97808;
+
+  --kr-vehicle-tile: #f3eff9;
+  --kr-amb-1: 0.1;
+  --kr-amb-2: 0.1;
+
+  --kr-green-bg: #e7f6ee;
+  --kr-green-bg-2: #d3eee0;
+  --kr-green-text: #0b7a4b;
+  --kr-red-bg: #fdecee;
+  --kr-red-bg-2: #fad7db;
+  --kr-red-text: #c62833;
+  --kr-amber-bg: #fff4dc;
+  --kr-amber-bg-2: #fdecc4;
+}
+
+.dark {
+  color-scheme: dark;
+  --kr-page: #100d18;
+  --kr-surface: #20192d;
+  --kr-input: #292137;
+  --kr-hover: #342945;
+  --kr-selected: #322848;
+  --kr-selected-strong: #3d3156;
+  --kr-header: rgb(25 20 33 / 0.94);
+  --kr-border: #493b5d;
+  --kr-border-strong: #5b4b72;
+
+  --kr-text: #f8f5fc;
+  --kr-text-2: #d0c7dd;
+  --kr-muted: #b0a5c2;
+
+  --kr-brand: #ffc04d;
+  --kr-brand-hover: #ffce70;
+  --kr-on-brand: #211c2d;
+  --kr-indigo: #3f3260;
+  --kr-indigo-hover: #4b3c73;
+  --kr-link: #d9cef6;
+  --kr-inverse: #3f3260;
+  --kr-inverse-hover: #4b3c73;
+  --kr-focus: #ffc04d;
+
+  --kr-pickup: #ff626a;
+  --kr-dest: #ffc04d;
+  --kr-dest-text: #ffc04d;
+
+  --kr-vehicle-tile: #ddd6ea;
+  --kr-amb-1: 0.28;
+  --kr-amb-2: 0.05;
+
+  --kr-green-bg: #123423;
+  --kr-green-bg-2: #184530;
+  --kr-green-text: #6fe0a0;
+  --kr-red-bg: #3a1a20;
+  --kr-red-bg-2: #4a2129;
+  --kr-red-text: #ff8a90;
+  --kr-amber-bg: #3a2d18;
+  --kr-amber-bg-2: #4a3920;
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono);
+
+  /* Neutrals -> semantic tokens */
+  --color-slate-50: var(--kr-hover);
+  --color-slate-100: var(--kr-input);
+  --color-slate-200: var(--kr-border);
+  --color-slate-300: var(--kr-border-strong);
+  --color-slate-400: var(--kr-muted);
+  --color-slate-500: var(--kr-muted);
+  --color-slate-600: var(--kr-text-2);
+  --color-slate-700: var(--kr-text-2);
+  --color-slate-800: var(--kr-text);
+  --color-slate-900: var(--kr-text);
+  --color-slate-950: var(--kr-text);
+
+  /* Midnight Indigo (brand): tints = selected surfaces, 5xx-9xx = links/focus */
+  --color-blue-50: var(--kr-selected);
+  --color-blue-100: var(--kr-selected-strong);
+  --color-blue-200: var(--kr-border-strong);
+  --color-blue-500: var(--kr-focus);
+  --color-blue-600: var(--kr-link);
+  --color-blue-700: var(--kr-link);
+  --color-blue-800: var(--kr-link);
+  --color-blue-900: var(--kr-link);
+
+  /* Saffron */
+  --color-amber-50: var(--kr-amber-bg);
+  --color-amber-100: var(--kr-amber-bg-2);
+  --color-amber-400: var(--kr-brand);
+  --color-amber-500: var(--kr-brand-hover);
+  --color-amber-600: var(--kr-dest-text);
+  --color-amber-700: var(--kr-dest-text);
+  --color-orange-400: var(--kr-brand);
+  --color-orange-500: var(--kr-brand-hover);
+
+  /* Status */
+  --color-emerald-50: var(--kr-green-bg);
+  --color-emerald-100: var(--kr-green-bg-2);
+  --color-emerald-600: var(--kr-green-text);
+  --color-emerald-700: var(--kr-green-text);
+  --color-red-50: var(--kr-red-bg);
+  --color-red-100: var(--kr-red-bg-2);
+  --color-red-500: var(--kr-red-text);
+  --color-red-600: var(--kr-red-text);
+  --color-red-700: var(--kr-red-text);
+}
+
+/*
+ * Role fixes that a scale mapping alone cannot express (Tailwind's `white` is also the
+ * text-on-fill colour, and dark fills carry white text). Theme-agnostic: they read tokens.
+ */
+body { background: var(--kr-page); color: var(--kr-text); }
+.bg-white { background-color: var(--kr-surface); }
+.bg-slate-50 { background-color: var(--kr-page); }
+.bg-white\/95, .bg-white\/90, .bg-white\/80 { background-color: var(--kr-header); }
+.bg-slate-700, .bg-slate-800, .bg-slate-900, .bg-slate-950 { background-color: var(--kr-inverse); }
+.bg-blue-600, .bg-blue-700, .bg-blue-800 { background-color: var(--kr-indigo); }
+/* State variants must outrank the base-surface rules above */
+.hover\:bg-white:hover, .focus-within\:bg-white:focus-within, .focus\:bg-white:focus,
+.active\:bg-white:active, .hover\:bg-slate-50:hover, .hover\:bg-slate-100:hover,
+.active\:bg-slate-100:active { background-color: var(--kr-hover); }
+.hover\:bg-blue-50:hover, .hover\:bg-amber-50:hover, .hover\:bg-emerald-50:hover { background-color: var(--kr-selected); }
+.hover\:bg-slate-200:hover, .hover\:bg-blue-100:hover, .hover\:bg-amber-100:hover { background-color: var(--kr-selected-strong); }
+.hover\:bg-red-50:hover { background-color: var(--kr-red-bg); }
+.hover\:bg-slate-700:hover, .hover\:bg-slate-800:hover { background-color: var(--kr-inverse-hover); }
+.hover\:bg-blue-700:hover, .hover\:bg-blue-800:hover { background-color: var(--kr-indigo-hover); }
+.hover\:bg-amber-500:hover { background-color: var(--kr-brand-hover); }
+/* Text on saffron fills stays ink in both themes */
+.bg-amber-400 :is(.text-slate-900, .text-slate-950), .bg-amber-400:is(.text-slate-900, .text-slate-950),
+.bg-orange-400 :is(.text-slate-900, .text-slate-950) { color: var(--kr-on-brand); }
+/* Modal scrims */
+[class*="bg-slate-900/"], [class*="bg-slate-950/"] { background-color: rgb(16 10 24 / 0.6); }
+
+/* Native controls: never browser-default white fields, options or autofill panels */
+:is(input, textarea, select):not([class*="bg-"]) { background-color: var(--kr-input); color: var(--kr-text); }
+option { background-color: var(--kr-surface); color: var(--kr-text); }
+::placeholder { color: var(--kr-muted); opacity: 1; }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--kr-text);
+  caret-color: var(--kr-text);
+  -webkit-box-shadow: 0 0 0 1000px var(--kr-input) inset;
+  transition: background-color 9999s ease-out 0s;
+}
+/* Location fields draw their own focus ring on the wrapper */
+.kalki-field input:focus-visible { outline: none; }
+::selection { background: var(--kr-brand); color: var(--kr-on-brand); }
+button, [role="button"], [role="radio"], a { -webkit-tap-highlight-color: transparent; }
+
+/* Map chrome (tiles are never filtered; see kalki-map.tsx) */
+.leaflet-container {
+  font-family: inherit;
+  background: var(--kr-input);
+}
+.leaflet-control-attribution {
+  background: var(--kr-header) !important;
+  color: var(--kr-text-2);
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 8px 0 0 0;
+}
+.leaflet-control-attribution a { color: var(--kr-link); }
+.leaflet-control-zoom a,
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--kr-surface);
+  color: var(--kr-text);
+}
+.kalki-pin { background: none; border: 0; }
+
+/* Map vehicle markers (top-down artwork, rotated to route bearing) */
+.kalki-vehicle-marker {
+  background: none;
+  border: 0;
+  pointer-events: none;
+}
+.kalki-vehicle {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / 0.35));
+}
+@media (max-width: 640px) {
+  .kalki-vehicle svg {
+    transform: scale(0.82);
+  }
+}
+
+/* ---------- Referral banner (compact) ---------- */
+.kalki-promo {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border-radius: 20px;
+  padding: 20px 20px 0;
+  color: #fff9f0;
+  background: radial-gradient(120% 140% at 85% -10%, #4d3d7e 0%, #30264a 48%, #221a38 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.09),
+    0 18px 36px -24px rgb(34 26 56 / 0.7);
+}
+.kalki-promo__copy {
+  position: relative;
+  z-index: 1;
+  max-width: 32rem;
+}
+.kalki-promo__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f4b544;
+}
+.kalki-promo__eyebrow::before {
+  content: "";
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: #f4b544;
+}
+.kalki-promo__title {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.3em;
+  font-size: clamp(1.65rem, 6.2vw, 2.4rem);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #fff9f0;
+}
+.kalki-promo__title span {
+  white-space: nowrap;
+}
+.kalki-promo__title b {
+  font-weight: 800;
+  color: #f4b544;
+}
+.kalki-promo__text {
+  margin-top: 8px;
+  max-width: 26rem;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #e4dcf2;
+}
+.kalki-promo__cta {
+  margin-top: 14px;
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px;
+  border-radius: 12px;
+  background: #f4b544;
+  color: #22212a;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 20px -10px rgb(244 181 68 / 0.85);
+  transition: transform 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+}
+.kalki-promo__cta svg {
+  transition: transform 150ms ease;
+}
+.kalki-promo__cta:hover {
+  background: #ffc45e;
+  box-shadow: 0 12px 24px -10px rgb(244 181 68 / 0.95);
+}
+.kalki-promo__cta:hover svg {
+  transform: translateX(3px);
+}
+.kalki-promo__cta:active {
+  transform: scale(0.97);
+}
+.kalki-promo__cta:focus-visible {
+  outline: 3px solid #fff9f0;
+  outline-offset: 3px;
+}
+.kalki-promo__art {
+  position: relative;
+  display: block;
+  width: calc(100% + 40px);
+  max-width: none;
+  height: 112px;
+  margin: 4px -20px 0;
+  object-fit: contain;
+  object-position: right bottom;
+  pointer-events: none;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16%, #000 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 16%, #000 100%);
+}
+@media (min-width: 768px) {
+  .kalki-promo {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: center;
+    padding: 28px 0 28px 40px;
+    border-radius: 24px;
+  }
+  .kalki-promo__art {
+    width: 100%;
+    height: 190px;
+    margin: 0;
+    object-position: right center;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 22%, #000 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 22%, #000 100%);
+  }
+}
+.dark .kalki-promo {
+  background: radial-gradient(120% 140% at 85% -10%, #5b4b94 0%, #3a2e5c 50%, #2a2140 100%);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.1),
+    0 18px 36px -24px rgb(0 0 0 / 0.8);
+}
+/* ---------- end referral banner ---------- */
+
+/* ---------- Base ---------- */
+html { -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; scroll-padding-top: 5rem; }
+/* Native smooth anchor scrolling (no scroll-hijacking library); off for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* Ambient depth: two soft, low-contrast gradients that drift very slowly (GPU transform only) */
+.kr-ambient { position: relative; isolation: isolate; overflow-x: clip; }
+.kr-ambient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 38% at 88% 0%, rgb(94 76 142 / var(--kr-amb-1)), transparent 72%),
+    radial-gradient(42% 30% at 4% 24%, rgb(244 181 68 / var(--kr-amb-2)), transparent 72%);
+  animation: kr-drift 48s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes kr-drift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-1.5%, 1.5%, 0) scale(1.03); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kr-ambient::before { animation: none; }
+}
+:focus-visible { outline: 2px solid var(--kr-focus); outline-offset: 2px; }
+
+/* Brief, subtle cross-fade only while the theme is being switched */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    fill 220ms ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
